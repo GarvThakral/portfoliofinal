@@ -38,60 +38,65 @@ export default function ContactSection() {
       >
         <h3 className="text-xl font-mono text-[#F8F8F2] mb-6">Send a Message</h3>
 
-        <form className="space-y-4" onSubmit={handleSubmit}>
-          <div className="grid gap-2">
-            <label htmlFor="name" className="text-sm font-mono text-[#A39DAC]">
-              _name:
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={formState.name}
-              onChange={handleChange}
-              className="bg-[#13111C] border border-[#2D2B3A] rounded-md p-3 text-[#F8F8F2] focus:ring-1 focus:ring-[#FF7EDB] focus:border-[#FF7EDB] outline-none font-mono"
-              placeholder="John Doe"
-              required
-            />
-          </div>
+<form
+  className="space-y-4"
+  action="https://formsubmit.co/garvthakralfx@gmail.com"
+  method="POST"
+>
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_next" value="https://yourportfolio.com/thank-you" />
 
-          <div className="grid gap-2">
-            <label htmlFor="email" className="text-sm font-mono text-[#A39DAC]">
-              _email:
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={formState.email}
-              onChange={handleChange}
-              className="bg-[#13111C] border border-[#2D2B3A] rounded-md p-3 text-[#F8F8F2] focus:ring-1 focus:ring-[#FF7EDB] focus:border-[#FF7EDB] outline-none font-mono"
-              placeholder="john@example.com"
-              required
-            />
-          </div>
+  <div className="grid gap-2">
+    <label htmlFor="name" className="text-sm font-mono text-[#A39DAC]">
+      _name:
+    </label>
+    <input
+      type="text"
+      name="name"
+      id="name"
+      className="bg-[#13111C] border border-[#2D2B3A] rounded-md p-3 text-[#F8F8F2] focus:ring-1 focus:ring-[#FF7EDB] focus:border-[#FF7EDB] outline-none font-mono"
+      placeholder="John Doe"
+      required
+    />
+  </div>
 
-          <div className="grid gap-2">
-            <label htmlFor="message" className="text-sm font-mono text-[#A39DAC]">
-              _message:
-            </label>
-            <textarea
-              id="message"
-              rows={5}
-              value={formState.message}
-              onChange={handleChange}
-              className="bg-[#13111C] border border-[#2D2B3A] rounded-md p-3 text-[#F8F8F2] focus:ring-1 focus:ring-[#FF7EDB] focus:border-[#FF7EDB] outline-none resize-none font-mono"
-              placeholder="Your message here..."
-              required
-            ></textarea>
-          </div>
+  <div className="grid gap-2">
+    <label htmlFor="email" className="text-sm font-mono text-[#A39DAC]">
+      _email:
+    </label>
+    <input
+      type="email"
+      name="email"
+      id="email"
+      className="bg-[#13111C] border border-[#2D2B3A] rounded-md p-3 text-[#F8F8F2] focus:ring-1 focus:ring-[#FF7EDB] focus:border-[#FF7EDB] outline-none font-mono"
+      placeholder="john@example.com"
+      required
+    />
+  </div>
 
-          <Button
-            type="submit"
-            className="w-full bg-transparent hover:bg-[#FF7EDB]/10 text-[#FF7EDB] border border-[#FF7EDB] rounded-md py-3 font-mono"
-          >
-            <Send className="mr-2 h-4 w-4" />
-            send_message()
-          </Button>
-        </form>
+  <div className="grid gap-2">
+    <label htmlFor="message" className="text-sm font-mono text-[#A39DAC]">
+      _message:
+    </label>
+    <textarea
+      name="message"
+      id="message"
+      rows={5}
+      className="bg-[#13111C] border border-[#2D2B3A] rounded-md p-3 text-[#F8F8F2] focus:ring-1 focus:ring-[#FF7EDB] focus:border-[#FF7EDB] outline-none resize-none font-mono"
+      placeholder="Your message here..."
+      required
+    ></textarea>
+  </div>
+
+  <Button
+    type="submit"
+    className="w-full bg-transparent hover:bg-[#FF7EDB]/10 text-[#FF7EDB] border border-[#FF7EDB] rounded-md py-3 font-mono"
+  >
+    <Send className="mr-2 h-4 w-4" />
+    send_message()
+  </Button>
+</form>
+
       </motion.div>
 
       <motion.div
@@ -121,17 +126,7 @@ export default function ContactSection() {
             </div>
           </motion.div>
 
-          <motion.div whileHover={{ x: 5 }} className="flex items-center gap-4">
-            <div className="p-3 bg-[#2D2B3A] text-[#80FFEA] rounded-md">
-              <Phone className="h-5 w-5" />
-            </div>
-            <div>
-              <h4 className="text-sm font-mono text-[#A39DAC]">_phone</h4>
-              <a href="tel:+917982646243" className="text-[#F8F8F2] hover:text-[#FF7EDB] transition-colors">
-                +91 79826 46243
-              </a>
-            </div>
-          </motion.div>
+
 
           <motion.div whileHover={{ x: 5 }} className="flex items-center gap-4">
             <div className="p-3 bg-[#2D2B3A] text-[#80FFEA] rounded-md">

@@ -23,7 +23,12 @@ export default function Home() {
         <div className="mb-8">
           <h2 className="text-xl font-mono font-bold mb-4 text-[#FF7EDB]">// contribution_activity</h2>
         </div>
-        <ContributionGraph />
+          <img
+            src="https://ghchart.rshah.org/FF7EDB/GarvThakral"
+            alt="GitHub Contribution Chart"
+            className="w-full max-w-3xl mx-auto"
+          />
+
       </section>
 
       {/* Projects Section */}
