@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button"
 
 export default function HeroSection() {
   const [typedText, setTypedText] = useState("")
-  const fullText = "I build web applications that look good, feel fast, and work flawlessly across devices."
+  const fullText =
+    "I build scalable AI & ML applications, design intelligent systems, and develop web platforms that deliver seamless user experiences."
   const typingSpeed = 50
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export default function HeroSection() {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="text-4xl md:text-6xl font-bold mb-6 text-[#FF7EDB]"
       >
-        Full Stack Developer
+        AI & ML Engineer
       </motion.h2>
 
       <motion.div
@@ -112,7 +113,10 @@ export default function HeroSection() {
           <Linkedin className="h-6 w-6" />
           <span className="sr-only">LinkedIn</span>
         </a>
-        <a href="mailto:garvthakralfx@gmail.com" className="text-[#A39DAC] hover:text-[#80FFEA] transition-colors">
+        <a
+          href="mailto:garvthakralfx@gmail.com"
+          className="text-[#A39DAC] hover:text-[#80FFEA] transition-colors"
+        >
           <Mail className="h-6 w-6" />
           <span className="sr-only">Email</span>
         </a>

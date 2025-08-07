@@ -18,7 +18,7 @@ const projects = [
     icon: <Terminal className="h-6 w-6" />, // You can change icon if you want specific to AI/ML
     tags: ["Python", "Transformers", "LoRA", "XNLI", "NLP"],
     liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/BengaliNLI",
+    githubUrl: "https://github.com/GarvThakral/NLIProject",
     color: "from-purple-500 to-pink-500",
     highlights: [
       "Fine-tuned XLM-RoBERTa-Large for Bengali text classification",
@@ -36,7 +36,7 @@ const projects = [
     icon: <LayoutDashboard className="h-6 w-6" />,
     tags: ["Python", "RAG", "ChromaDB", "LangChain", "AWS", "GenAI"],
     liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/DocumentQA",
+    githubUrl: "https://github.com/GarvThakral/chatbotCode",
     color: "from-blue-500 to-cyan-500",
     highlights: [
       "Built RAG-based question answering system",
@@ -54,7 +54,7 @@ const projects = [
     icon: <Users className="h-6 w-6" />,
     tags: ["TensorFlow", "NLP", "DistilBERT", "ZenML", "MLflow", "Streamlit"],
     liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/EDM",
+    githubUrl: "https://github.com/GarvThakral/emotion_drift",
     color: "from-green-500 to-teal-500",
     highlights: [
       "Tracked emotional shifts in 50K+ YouTube comments",
@@ -74,7 +74,7 @@ const projects = [
     icon: <LayoutDashboard className="h-6 w-6" />,
     tags: ["React", "Prisma", "PostgreSQL", "AI Integration"],
     liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/JobDashboard",
+    githubUrl: "https://github.com/GarvThakral/JobAnalysisFrontend",
     color: "from-teal-500 to-emerald-500",
     highlights: [
       "Created a dashboard to track over 50 job applications",
@@ -93,7 +93,7 @@ const projects = [
     icon: <Users className="h-6 w-6" />,
     tags: ["React", "Node.js", "PostgreSQL", "WebSockets", "Dyte API"],
     liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/SkillTrade",
+    githubUrl: "https://github.com/GarvThakral/SkillSwapFE",
     color: "from-violet-500 to-purple-500",
     highlights: [
       "Developed a token-based skill exchange platform with real-time collaboration",
@@ -112,7 +112,7 @@ const projects = [
     icon: <Film className="h-6 w-6" />,
     tags: ["Python", "Flask", "Next.js", "TF-IDF", "Cosine Similarity"],
     liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/RecommendationSystem",
+    githubUrl: "https://github.com/GarvThakral/MovieRecommenderModel",
     color: "from-rose-500 to-pink-500",
     highlights: [
       "Developed a content-based recommendation engine using TF-IDF and cosine similarity",

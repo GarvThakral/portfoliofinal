@@ -30,75 +30,23 @@ export default function ContactSection() {
 
   return (
     <div className="grid md:grid-cols-2 gap-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="bg-[#201C2B] rounded-md border border-[#2D2B3A] p-6"
-      >
-        <h3 className="text-xl font-mono text-[#F8F8F2] mb-6">Send a Message</h3>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="bg-[#201C2B] rounded-md border border-[#2D2B3A] p-6 max-w-xl mx-auto"
+    >
+      <h3 className="text-xl font-mono text-[#F8F8F2] mb-6 text-center">Get in Touch</h3>
 
-<form
-  className="space-y-4"
-  action="https://formsubmit.co/garvthakralfx@gmail.com"
-  method="POST"
->
-  <input type="hidden" name="_captcha" value="false" />
-  <input type="hidden" name="_next" value="https://yourportfolio.com/thank-you" />
+      <p className="text-[#A39DAC] font-mono text-center mb-4">
+        I’m excited to connect! Whether you have a project in mind, want to collaborate, or just want to say hi,
+        don’t hesitate to reach out. I’m always open to new opportunities and conversations.
+      </p>
 
-  <div className="grid gap-2">
-    <label htmlFor="name" className="text-sm font-mono text-[#A39DAC]">
-      _name:
-    </label>
-    <input
-      type="text"
-      name="name"
-      id="name"
-      className="bg-[#13111C] border border-[#2D2B3A] rounded-md p-3 text-[#F8F8F2] focus:ring-1 focus:ring-[#FF7EDB] focus:border-[#FF7EDB] outline-none font-mono"
-      placeholder="John Doe"
-      required
-    />
-  </div>
-
-  <div className="grid gap-2">
-    <label htmlFor="email" className="text-sm font-mono text-[#A39DAC]">
-      _email:
-    </label>
-    <input
-      type="email"
-      name="email"
-      id="email"
-      className="bg-[#13111C] border border-[#2D2B3A] rounded-md p-3 text-[#F8F8F2] focus:ring-1 focus:ring-[#FF7EDB] focus:border-[#FF7EDB] outline-none font-mono"
-      placeholder="john@example.com"
-      required
-    />
-  </div>
-
-  <div className="grid gap-2">
-    <label htmlFor="message" className="text-sm font-mono text-[#A39DAC]">
-      _message:
-    </label>
-    <textarea
-      name="message"
-      id="message"
-      rows={5}
-      className="bg-[#13111C] border border-[#2D2B3A] rounded-md p-3 text-[#F8F8F2] focus:ring-1 focus:ring-[#FF7EDB] focus:border-[#FF7EDB] outline-none resize-none font-mono"
-      placeholder="Your message here..."
-      required
-    ></textarea>
-  </div>
-
-  <Button
-    type="submit"
-    className="w-full bg-transparent hover:bg-[#FF7EDB]/10 text-[#FF7EDB] border border-[#FF7EDB] rounded-md py-3 font-mono"
-  >
-    <Send className="mr-2 h-4 w-4" />
-    send_message()
-  </Button>
-</form>
-
-      </motion.div>
-
+      <p className="text-[#A39DAC] font-mono text-center leading-relaxed">
+        You can reach me via email or social media (details are provided elsewhere on this site). Looking forward to hearing from you!
+      </p>
+    </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

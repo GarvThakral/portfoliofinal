@@ -5,8 +5,25 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Code, Database, Server, Cpu, Palette, Cloud } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
-// Skills data from resume
+// Skills data from resume - AI & ML moved to front for default selection
 const skillsCategories = [
+  {
+    id: "ai",
+    title: "AI & ML",
+    icon: <Cpu className="h-5 w-5" />,
+    skills: [
+      "Python",
+      "TensorFlow",
+      "Keras",
+      "OpenCV",
+      "Data Analysis",
+      "Natural Language Processing",
+      "Computer Vision",
+      "Model Training",
+      "AI Integration",
+      "ML Ops",
+    ],
+  },
   {
     id: "frontend",
     title: "Frontend",
@@ -76,23 +93,6 @@ const skillsCategories = [
     ],
   },
   {
-    id: "ai",
-    title: "AI & ML",
-    icon: <Cpu className="h-5 w-5" />,
-    skills: [
-      "Python",
-      "TensorFlow",
-      "Keras",
-      "OpenCV",
-      "Data Analysis",
-      "Natural Language Processing",
-      "Computer Vision",
-      "Model Training",
-      "AI Integration",
-      "ML Ops",
-    ],
-  },
-  {
     id: "tools",
     title: "Tools & Design",
     icon: <Palette className="h-5 w-5" />,
@@ -112,10 +112,11 @@ const skillsCategories = [
 ]
 
 export default function SkillsSection() {
-  const [activeCategory, setActiveCategory] = useState(skillsCategories[0].id)
+  // Set default active category to AI & ML
+  const [activeCategory, setActiveCategory] = useState("ai")
 
-  const activeSkills = skillsCategories.find((cat) => cat.id === activeCategory)?.skills || []
   const activeCategoryData = skillsCategories.find((cat) => cat.id === activeCategory)
+  const activeSkills = activeCategoryData?.skills || []
 
   return (
     <div className="bg-[#201C2B] rounded-md border border-[#2D2B3A] p-6">
