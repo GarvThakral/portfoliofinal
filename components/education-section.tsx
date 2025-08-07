@@ -26,23 +26,24 @@ const education = [
 const certifications = [
   {
     id: 1,
+    name: "Deep Learning Specialization",
+    issuer: "Coursera (Andrew Ng)",
+    icon: <Award className="h-5 w-5" />,
+  },
+  {
+    id: 2,
     name: "AWS Academy Cloud Foundations",
     issuer: "Amazon Web Services",
     icon: <Award className="h-5 w-5" />,
   },
   {
-    id: 2,
+    id: 3,
     name: "Introduction to Machine Learning",
     issuer: "freeCodeCamp",
     icon: <Award className="h-5 w-5" />,
   },
-  {
-    id: 3,
-    name: "Responsive Web Design Certification",
-    issuer: "freeCodeCamp",
-    icon: <Award className="h-5 w-5" />,
-  },
 ]
+
 
 export default function EducationSection() {
   return (

@@ -8,27 +8,65 @@ import { Badge } from "@/components/ui/badge"
 
 // Project data from resume
 const projects = [
+  // AI/ML projects first
   {
     id: 1,
-    title: "Dex | C++ CLI Tool",
+    title: "Bengali NLI System",
     description:
-      "A command-line tool designed to reduce boilerplate code by 40% and accelerate project setup from 10 to 3 minutes. Features 15 modular commands with cross-platform compatibility across Windows, Linux, and macOS.",
+      "Fine-tuned XLM-RoBERTa-Large using LoRA on Bengali XNLI dataset to classify premise-hypothesis pairs, achieving 84% F1-score.",
     image: "/placeholder.svg?height=600&width=800",
-    icon: <Terminal className="h-6 w-6" />,
-    tags: ["C++", "CLI", "Git Integration", "Cross-Platform"],
+    icon: <Terminal className="h-6 w-6" />, // You can change icon if you want specific to AI/ML
+    tags: ["Python", "Transformers", "LoRA", "XNLI", "NLP"],
     liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/Dex",
-    color: "from-amber-500 to-orange-500",
+    githubUrl: "https://github.com/GarvThakral/BengaliNLI",
+    color: "from-purple-500 to-pink-500",
     highlights: [
-      "Designed and implemented 15 modular commands in C++",
-      "Reduced boilerplate code by 40%",
-      "Accelerated project setup from 10 to 3 minutes",
-      "100% success in automated CI builds",
-      "Integrated Git operations and project template management",
+      "Fine-tuned XLM-RoBERTa-Large for Bengali text classification",
+      "Achieved 84% F1-score on XNLI dataset",
+      "Implemented LoRA for efficient training",
+      "Enhanced NLP pipeline for low-resource language",
     ],
   },
   {
     id: 2,
+    title: "Document Intelligence & QA System",
+    description:
+      "RAG-based Q&A system for 1,000+ multi-format documents using SentenceTransformers, ChromaDB, and AWS Lambda. Integrated LangChain and Gemini API.",
+    image: "/placeholder.svg?height=600&width=800",
+    icon: <LayoutDashboard className="h-6 w-6" />,
+    tags: ["Python", "RAG", "ChromaDB", "LangChain", "AWS", "GenAI"],
+    liveUrl: "#",
+    githubUrl: "https://github.com/GarvThakral/DocumentQA",
+    color: "from-blue-500 to-cyan-500",
+    highlights: [
+      "Built RAG-based question answering system",
+      "Processed over 1,000 multi-format documents",
+      "Used LangChain and Gemini API for advanced inference",
+      "Deployed on AWS Lambda serverless platform",
+    ],
+  },
+  {
+    id: 3,
+    title: "Emotion Drift Monitoring System (EDM)",
+    description:
+      "Fine-tuned DistilBERT (GoEmotions) to track emotion shifts in 50,000+ YouTube comments. ML pipeline with ZenML & MLflow, Streamlit dashboard, and Evidently for drift alerts.",
+    image: "/placeholder.svg?height=600&width=800",
+    icon: <Users className="h-6 w-6" />,
+    tags: ["TensorFlow", "NLP", "DistilBERT", "ZenML", "MLflow", "Streamlit"],
+    liveUrl: "#",
+    githubUrl: "https://github.com/GarvThakral/EDM",
+    color: "from-green-500 to-teal-500",
+    highlights: [
+      "Tracked emotional shifts in 50K+ YouTube comments",
+      "Implemented ML pipeline with ZenML and MLflow",
+      "Integrated drift detection and alerts in Streamlit UI",
+      "Achieved F1-score of 0.62 with optimized training",
+    ],
+  },
+
+  // Web development projects retained next
+  {
+    id: 4,
     title: "Job Dashboard",
     description:
       "A dashboard to track job applications, improving review efficiency by 25% through intuitive UI design. Features AI-based analysis to generate resume suggestions with an 80% user adoption rate.",
@@ -47,7 +85,7 @@ const projects = [
     ],
   },
   {
-    id: 3,
+    id: 5,
     title: "SkillTrade",
     description:
       "A token-based skill exchange platform with real-time collaboration features. Integrated Dyte API for video calls and WebSocket chat, maintaining 99% uptime across 100+ test sessions.",
@@ -66,7 +104,7 @@ const projects = [
     ],
   },
   {
-    id: 4,
+    id: 6,
     title: "Recommendation System",
     description:
       "A content-based recommendation engine using TF-IDF and cosine similarity, achieving 85% accuracy in user feedback. Built with Flask API to process over 1,000 movie records and deliver recommendations.",
