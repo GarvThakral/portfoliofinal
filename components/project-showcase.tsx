@@ -54,7 +54,7 @@ const projects = [
     icon: <Users className="h-6 w-6" />,
     tags: ["TensorFlow", "NLP", "DistilBERT", "ZenML", "MLflow", "Streamlit"],
     liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/emotion_drift",
+    githubUrl: "https://github.com/GarvThakral/EDM",
     color: "from-green-500 to-teal-500",
     highlights: [
       "Tracked emotional shifts in 50K+ YouTube comments",
