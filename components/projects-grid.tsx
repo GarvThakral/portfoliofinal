@@ -1,209 +1,87 @@
-"use client"
-
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { ExternalLink, Github, Folder, Terminal, LayoutDashboard, Users, Film } from "lucide-react"
+import Image from "next/image"
+import { ArrowUpRight, ChevronDown, Folder, Github } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { earlierProjects, featuredProjects, type Project } from "@/lib/portfolio-data"
 
-// Project data from resume
-const projects = [
-  // AI/ML projects first
-  {
-    id: 1,
-    title: "Bengali NLI System",
-    description:
-      "Fine-tuned XLM-RoBERTa-Large using LoRA on Bengali XNLI dataset to classify premise-hypothesis pairs, achieving 84% F1-score.",
-    image: "/placeholder.svg?height=600&width=800",
-    icon: <Terminal className="h-6 w-6" />, // You can change icon if you want specific to AI/ML
-    tags: ["Python", "Transformers", "LoRA", "XNLI", "NLP"],
-    liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/NLIProject",
-    color: "from-purple-500 to-pink-500",
-    highlights: [
-      "Fine-tuned XLM-RoBERTa-Large for Bengali text classification",
-      "Achieved 84% F1-score on XNLI dataset",
-      "Implemented LoRA for efficient training",
-      "Enhanced NLP pipeline for low-resource language",
-    ],
-  },
-  {
-    id: 2,
-    title: "Document Intelligence & QA System",
-    description:
-      "RAG-based Q&A system for 1,000+ multi-format documents using SentenceTransformers, ChromaDB, and AWS Lambda. Integrated LangChain and Gemini API.",
-    image: "/placeholder.svg?height=600&width=800",
-    icon: <LayoutDashboard className="h-6 w-6" />,
-    tags: ["Python", "RAG", "ChromaDB", "LangChain", "AWS", "GenAI"],
-    liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/ChatBotCode",
-    color: "from-blue-500 to-cyan-500",
-    highlights: [
-      "Built RAG-based question answering system",
-      "Processed over 1,000 multi-format documents",
-      "Used LangChain and Gemini API for advanced inference",
-      "Deployed on AWS Lambda serverless platform",
-    ],
-  },
-  {
-    id: 3,
-    title: "Emotion Drift Monitoring System (EDM)",
-    description:
-      "Fine-tuned DistilBERT (GoEmotions) to track emotion shifts in 50,000+ YouTube comments. ML pipeline with ZenML & MLflow, Streamlit dashboard, and Evidently for drift alerts.",
-    image: "/placeholder.svg?height=600&width=800",
-    icon: <Users className="h-6 w-6" />,
-    tags: ["TensorFlow", "NLP", "DistilBERT", "ZenML", "MLflow", "Streamlit"],
-    liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/EDM",
-    color: "from-green-500 to-teal-500",
-    highlights: [
-      "Tracked emotional shifts in 50K+ YouTube comments",
-      "Implemented ML pipeline with ZenML and MLflow",
-      "Integrated drift detection and alerts in Streamlit UI",
-      "Achieved F1-score of 0.62 with optimized training",
-    ],
-  },
-
-  // Web development projects retained next
-  {
-    id: 4,
-    title: "Job Dashboard",
-    description:
-      "A dashboard to track job applications, improving review efficiency by 25% through intuitive UI design. Features AI-based analysis to generate resume suggestions with an 80% user adoption rate.",
-    image: "/placeholder.svg?height=600&width=800",
-    icon: <LayoutDashboard className="h-6 w-6" />,
-    tags: ["React", "Prisma", "PostgreSQL", "AI Integration"],
-    liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/JobAnalysisFrontend",
-    color: "from-teal-500 to-emerald-500",
-    highlights: [
-      "Created a dashboard to track over 50 job applications",
-      "Improved review efficiency by 25% through intuitive UI design",
-      "Implemented AI-based analysis to generate 200+ resume suggestions",
-      "Achieved an 80% user adoption rate",
-      "Built modular React components for sorting, filtering, and visualizing data",
-    ],
-  },
-  {
-    id: 5,
-    title: "SkillTrade",
-    description:
-      "A token-based skill exchange platform with real-time collaboration features. Integrated Dyte API for video calls and WebSocket chat, maintaining 99% uptime across 100+ test sessions.",
-    image: "/placeholder.svg?height=600&width=800",
-    icon: <Users className="h-6 w-6" />,
-    tags: ["React", "Node.js", "PostgreSQL", "WebSockets", "Dyte API"],
-    liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/SkillSwapFE",
-    color: "from-violet-500 to-purple-500",
-    highlights: [
-      "Developed a token-based skill exchange platform with real-time collaboration",
-      "Integrated Dyte API for video calls and WebSocket chat",
-      "Maintained 99% uptime across 100+ test sessions",
-      "Implemented an offer system and chat history tracking",
-      "Ensured secure user authentication and data management",
-    ],
-  },
-  {
-    id: 6,
-    title: "Recommendation System",
-    description:
-      "A content-based recommendation engine using TF-IDF and cosine similarity, achieving 85% accuracy in user feedback. Built with Flask API to process over 1,000 movie records and deliver recommendations.",
-    image: "/placeholder.svg?height=600&width=800",
-    icon: <Film className="h-6 w-6" />,
-    tags: ["Python", "Flask", "Next.js", "TF-IDF", "Cosine Similarity"],
-    liveUrl: "#",
-    githubUrl: "https://github.com/GarvThakral/MovieRecommenderModel",
-    color: "from-rose-500 to-pink-500",
-    highlights: [
-      "Developed a content-based recommendation engine using TF-IDF and cosine similarity",
-      "Achieved 85% accuracy in user feedback",
-      "Built a Flask API to process over 1,000 movie records",
-      "Handled 200 requests daily",
-      "Created a Next.js frontend for user interaction",
-    ],
-  },
-]
-
-export default function ProjectsGrid() {
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null)
-
+function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="grid md:grid-cols-2 gap-6">
-      {projects.map((project) => (
-        <motion.div
-          key={project.id}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: project.id * 0.1 }}
-          className="bg-[#201C2B] rounded-md p-6 flex flex-col h-full border border-[#2D2B3A] hover:border-[#FF7EDB]/50 transition-all duration-300"
-          onMouseEnter={() => setHoveredProject(project.id)}
-          onMouseLeave={() => setHoveredProject(null)}
-        >
-          <div className="flex justify-between items-start mb-6">
-            <div className="p-2 bg-[#201C2B] text-[#80FFEA] rounded-md">
-              <Folder className="h-6 w-6" />
-            </div>
-            <div className="flex gap-4">
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#A39DAC] hover:text-[#80FFEA] transition-colors"
-                >
-                  <Github className="h-5 w-5" />
-                  <span className="sr-only">GitHub</span>
-                </a>
-              )}
-              {project.liveUrl && project.liveUrl !== "#" && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#A39DAC] hover:text-[#80FFEA] transition-colors"
-                >
-                  <ExternalLink className="h-5 w-5" />
-                  <span className="sr-only">Live Demo</span>
-                </a>
-              )}
-            </div>
-          </div>
-
-          <h3 className="text-xl font-semibold text-[#F8F8F2] mb-2">{project.title}</h3>
-          <p className="text-[#A39DAC] mb-6 flex-grow">{project.description}</p>
-
-          <div className="space-y-4">
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <Badge
-                  key={tag}
-                  className="bg-[#2D2B3A] hover:bg-[#2D2B3A] text-[#80FFEA] border-none text-xs font-mono"
-                >
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-
-            {hoveredProject === project.id && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="mt-4"
-              >
-                <h4 className="text-sm font-mono text-[#FF7EDB] mb-2">Highlights:</h4>
-                <ul className="space-y-1">
-                  {project.highlights.map((highlight, index) => (
-                    <li key={index} className="text-xs text-[#A39DAC] flex items-start gap-2">
-                      <span className="text-[#80FFEA]">▹</span>
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
+    <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-md border border-[#2D2B3A] bg-[#201C2B] transition-colors hover:border-[#FF7EDB]/50">
+      {project.image && (
+        <div className="relative aspect-[16/9] overflow-hidden border-b border-[#2D2B3A] bg-[#13111C]">
+          <Image src={project.image} alt={project.imageAlt || project.title} fill sizes="(max-width: 767px) 100vw, 50vw" className="object-contain transition-transform duration-500 motion-safe:group-hover:scale-[1.02]" />
+        </div>
+      )}
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <div className="mb-4 flex items-start justify-between gap-4">
+          <p className="font-mono text-xs leading-relaxed text-[#80FFEA]">{project.category}</p>
+          {!project.image && <Folder className="h-5 w-5 shrink-0 text-[#80FFEA]" aria-hidden="true" />}
+        </div>
+        <h3 className="mb-2 text-2xl font-semibold tracking-tight text-[#F8F8F2]">{project.title}</h3>
+        {project.role && <p className="mb-3 font-mono text-xs text-[#FF7EDB]">{project.role}</p>}
+        <p className="mb-6 flex-1 leading-relaxed text-[#A39DAC]">{project.description}</p>
+        {project.metrics && (
+          <dl className="mb-6 grid grid-cols-2 gap-4 border-y border-[#2D2B3A] py-4">
+            {project.metrics.map((metric) => (
+              <div key={metric.label} className="flex min-w-0 flex-col">
+                <dt className="mt-1 font-mono text-xs text-[#A39DAC]">{metric.label}</dt>
+                <dd className="order-first text-xl font-semibold text-[#F8F8F2]">{metric.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+        <div className="mb-5 flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <Badge key={tag} className="border-none bg-[#2D2B3A] font-mono text-xs font-normal text-[#80FFEA] hover:bg-[#2D2B3A]">{tag}</Badge>
+          ))}
+        </div>
+        <details className="group/details border-t border-[#2D2B3A] pt-4">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-2 rounded-sm py-1 font-mono text-sm text-[#FF7EDB] [&::-webkit-details-marker]:hidden">
+            <span>Engineering highlights<span className="sr-only"> for {project.title}</span></span>
+            <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open/details:rotate-180" aria-hidden="true" />
+          </summary>
+          <ul className="mt-4 space-y-3 text-sm leading-relaxed text-[#A39DAC]">
+            {project.highlights.map((highlight) => (
+              <li key={highlight} className="flex gap-2"><span className="text-[#80FFEA]" aria-hidden="true">▹</span><span>{highlight}</span></li>
+            ))}
+          </ul>
+        </details>
+        {(project.githubUrl || project.liveUrl) && (
+          <div className="mt-5 flex flex-wrap gap-5 border-t border-[#2D2B3A] pt-4">
+            {project.githubUrl && (
+              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-mono text-sm text-[#A39DAC] transition-colors hover:text-[#80FFEA]">
+                <Github className="h-4 w-4" aria-hidden="true" />Source code<span className="sr-only"> for {project.title}</span>
+              </a>
+            )}
+            {project.liveUrl && (
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-mono text-sm text-[#A39DAC] transition-colors hover:text-[#80FFEA]">
+                Live project<span className="sr-only">: {project.title}</span><ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
             )}
           </div>
-        </motion.div>
-      ))}
+        )}
+      </div>
+    </article>
+  )
+}
+
+export default function ProjectsGrid() {
+  return (
+    <div>
+      <div className="grid items-start gap-6 md:grid-cols-2">
+        {featuredProjects.map((project) => <ProjectCard key={project.id} project={project} />)}
+      </div>
+      <details className="group/archive mt-10 rounded-md border border-[#2D2B3A] bg-[#201C2B]/40 p-5 sm:p-6">
+        <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-4 rounded-sm [&::-webkit-details-marker]:hidden">
+          <span>
+            <span className="block text-lg font-semibold text-[#F8F8F2]">Earlier projects</span>
+            <span className="mt-1 block text-sm text-[#A39DAC]">NLP experiments, full-stack applications, and the work that came before.</span>
+          </span>
+          <span className="flex items-center gap-3 font-mono text-xs text-[#80FFEA]">{earlierProjects.length} projects<ChevronDown className="h-4 w-4 transition-transform group-open/archive:rotate-180" aria-hidden="true" /></span>
+        </summary>
+        <div className="mt-6 grid items-start gap-6 md:grid-cols-2">
+          {earlierProjects.map((project) => <ProjectCard key={project.id} project={project} />)}
+        </div>
+      </details>
     </div>
   )
 }

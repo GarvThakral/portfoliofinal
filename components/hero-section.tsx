@@ -1,31 +1,17 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { Github, Linkedin, Mail, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { profile } from "@/lib/portfolio-data"
 
 export default function HeroSection() {
-  const [typedText, setTypedText] = useState("")
-  const fullText =
-    "I build scalable AI & ML applications, design intelligent systems, and develop web platforms that deliver seamless user experiences."
-  const typingSpeed = 50
-
-  useEffect(() => {
-    if (typedText.length < fullText.length) {
-      const timeout = setTimeout(() => {
-        setTypedText(fullText.slice(0, typedText.length + 1))
-      }, typingSpeed)
-      return () => clearTimeout(timeout)
-    }
-  }, [typedText])
+  const reduceMotion = useReducedMotion()
 
   return (
-    <div className="min-h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 max-w-7xl mx-auto relative">
-      <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
-
+    <div id="home" className="flex min-h-[80svh] flex-col justify-center px-4 pb-16 pt-28 md:px-8 lg:px-16 max-w-7xl mx-auto relative">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="mb-4"
@@ -34,44 +20,45 @@ export default function HeroSection() {
       </motion.div>
 
       <motion.h1
-        initial={{ opacity: 0, y: 20 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
         className="text-5xl md:text-7xl font-bold mb-4 text-[#F8F8F2]"
       >
-        Garv Thakral.
+        {profile.name}.
       </motion.h1>
 
       <motion.h2
-        initial={{ opacity: 0, y: 20 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
         className="text-4xl md:text-6xl font-bold mb-6 text-[#FF7EDB]"
       >
-        AI & ML Engineer
+        {profile.title}
       </motion.h2>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="mb-8 max-w-xl"
+        className="mb-8 max-w-2xl"
       >
-        <p className="text-[#A39DAC] text-lg font-mono">
-          <span className="text-[#80FFEA]">$ </span>
-          {typedText}
-          <span className="inline-block w-2 h-5 bg-[#80FFEA] ml-1 animate-blink"></span>
+        <p className="mb-5 text-sm font-mono leading-relaxed text-[#80FFEA]">{profile.subtitle}</p>
+        <p className="text-[#C2BDCB] text-lg leading-relaxed">
+          <span className="text-[#80FFEA] font-mono" aria-hidden="true">$ </span>
+          {profile.summary}
         </p>
+        <p className="mt-4 text-sm leading-relaxed text-[#A39DAC]">{profile.about}</p>
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.5 }}
         className="flex flex-col sm:flex-row gap-4"
       >
         <Button
-          className="bg-transparent hover:bg-[#FF7EDB]/10 text-[#FF7EDB] border border-[#FF7EDB] rounded px-6 py-4 font-mono"
+          className="bg-[#FF7EDB] hover:bg-[#FF7EDB]/90 text-[#13111C] border border-[#FF7EDB] rounded px-6 py-5 font-mono"
           asChild
         >
           <a href="#projects">
@@ -90,13 +77,13 @@ export default function HeroSection() {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.7 }}
         className="mt-12 flex gap-6"
       >
         <a
-          href="https://github.com/GarvThakral"
+          href={profile.github}
           target="_blank"
           rel="noopener noreferrer"
           className="text-[#A39DAC] hover:text-[#80FFEA] transition-colors"
@@ -105,7 +92,7 @@ export default function HeroSection() {
           <span className="sr-only">GitHub</span>
         </a>
         <a
-          href="https://linkedin.com/in/garv-thakral08"
+          href={profile.linkedin}
           target="_blank"
           rel="noopener noreferrer"
           className="text-[#A39DAC] hover:text-[#80FFEA] transition-colors"
@@ -114,7 +101,7 @@ export default function HeroSection() {
           <span className="sr-only">LinkedIn</span>
         </a>
         <a
-          href="mailto:garvthakralfx@gmail.com"
+          href={`mailto:${profile.email}`}
           className="text-[#A39DAC] hover:text-[#80FFEA] transition-colors"
         >
           <Mail className="h-6 w-6" />

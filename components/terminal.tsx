@@ -5,6 +5,7 @@ import type React from "react"
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { TerminalIcon, Maximize2, Minimize2, X } from "lucide-react"
+import { profile, projects, skillsCategories } from "@/lib/portfolio-data"
 
 type CommandResult = {
   command: string
@@ -94,14 +95,10 @@ export default function Terminal() {
       case "whoami":
         output = (
           <div className="text-[#A39DAC] mt-2">
-            <p className="text-[#FF7EDB] mb-1">Garv Thakral</p>
-            <p>
-              Full Stack Developer passionate about building web applications that look good, feel fast, and work
-              flawlessly across devices.
-            </p>
-            <p className="mt-1">
-              Based in Bengaluru, India. Currently pursuing Bachelor of Computer Applications at Christ University.
-            </p>
+            <p className="text-[#FF7EDB] mb-1">{profile.name} · {profile.title}</p>
+            <p>{profile.summary}</p>
+            <p className="mt-2">{profile.about}</p>
+            <p className="mt-2">{profile.education}</p>
           </div>
         )
         break
@@ -111,31 +108,12 @@ export default function Terminal() {
           <div className="text-[#A39DAC] mt-2">
             <p className="text-[#FF7EDB] mb-1">My Projects:</p>
             <ul className="space-y-2">
-              <li>
-                <div className="flex items-center gap-2">
-                  <span className="text-[#80FFEA]">→</span>
-                  <span className="text-[#F8F8F2]">Dex | C++ CLI Tool</span>
-                </div>
-                <p className="pl-6">
-                  A command-line tool designed to reduce boilerplate code by 40% and accelerate project setup.
-                </p>
-              </li>
-              <li>
-                <div className="flex items-center gap-2">
-                  <span className="text-[#80FFEA]">→</span>
-                  <span className="text-[#F8F8F2]">Job Dashboard</span>
-                </div>
-                <p className="pl-6">
-                  A dashboard to track job applications with AI-based analysis for resume suggestions.
-                </p>
-              </li>
-              <li>
-                <div className="flex items-center gap-2">
-                  <span className="text-[#80FFEA]">→</span>
-                  <span className="text-[#F8F8F2]">SkillTrade</span>
-                </div>
-                <p className="pl-6">A token-based skill exchange platform with real-time collaboration features.</p>
-              </li>
+              {projects.map((project) => (
+                <li key={project.id}>
+                  <p className="text-[#F8F8F2]"><span className="text-[#80FFEA]">→ </span>{project.title}</p>
+                  <p className="pl-6">{project.description}</p>
+                </li>
+              ))}
             </ul>
             <p className="mt-2 text-[#80FFEA]">
               Type <span className="text-[#FF7EDB]">cd projects</span> to navigate to the projects section.
@@ -148,23 +126,13 @@ export default function Terminal() {
         output = (
           <div className="text-[#A39DAC] mt-2">
             <p className="text-[#FF7EDB] mb-1">Technical Skills:</p>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-              <div>
-                <p className="text-[#80FFEA]">Frontend:</p>
-                <p>React, Next.js, TypeScript, Tailwind CSS</p>
-              </div>
-              <div>
-                <p className="text-[#80FFEA]">Backend:</p>
-                <p>Node.js, Express, REST APIs, GraphQL</p>
-              </div>
-              <div className="mt-2">
-                <p className="text-[#80FFEA]">Database:</p>
-                <p>PostgreSQL, MongoDB, Firebase</p>
-              </div>
-              <div className="mt-2">
-                <p className="text-[#80FFEA]">Other:</p>
-                <p>Git, Docker, AWS, CI/CD</p>
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {skillsCategories.map((category) => (
+                <div key={category.id}>
+                  <p className="text-[#80FFEA]">{category.title}:</p>
+                  <p>{category.skills.join(", ")}</p>
+                </div>
+              ))}
             </div>
             <p className="mt-2 text-[#80FFEA]">
               Type <span className="text-[#FF7EDB]">cd skills</span> to navigate to the skills section.
@@ -206,7 +174,7 @@ export default function Terminal() {
             <p className="text-[#FF7EDB] mb-1">Contact Information:</p>
             <ul className="space-y-1">
               <li>
-                <span className="text-[#80FFEA]">Email:</span> garvthakralfx@gmail.com
+                <span className="text-[#80FFEA]">Email:</span> {profile.email}
               </li>
               <li>
                 <span className="text-[#80FFEA]">Phone:</span> +91 79826 46243
@@ -227,7 +195,7 @@ export default function Terminal() {
               <li>
                 <span className="text-[#80FFEA]">GitHub:</span>{" "}
                 <a
-                  href="https://github.com/GarvThakral"
+                  href={profile.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#F8F8F2] hover:text-[#FF7EDB] underline"
@@ -238,13 +206,17 @@ export default function Terminal() {
               <li>
                 <span className="text-[#80FFEA]">LinkedIn:</span>{" "}
                 <a
-                  href="https://linkedin.com/in/garv-thakral08"
+                  href={profile.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#F8F8F2] hover:text-[#FF7EDB] underline"
                 >
                   linkedin.com/in/garv-thakral08
                 </a>
+              </li>
+              <li>
+                <span className="text-[#80FFEA]">X:</span>{" "}
+                <a href={profile.x} target="_blank" rel="noopener noreferrer" className="text-[#F8F8F2] hover:text-[#FF7EDB] underline">x.com/Garvfx</a>
               </li>
             </ul>
           </div>
@@ -344,6 +316,8 @@ export default function Terminal() {
       {/* Terminal toggle button */}
       <div className="fixed bottom-4 right-4 z-40">
         <button
+          aria-label={isOpen ? "Close portfolio terminal" : "Open portfolio terminal"}
+          aria-expanded={isOpen}
           onClick={() => {
             setIsOpen(!isOpen)
             setIsMinimized(false)
@@ -385,18 +359,21 @@ export default function Terminal() {
               </div>
               <div className="flex items-center gap-2">
                 <button
+                  aria-label={isMinimized ? "Restore terminal" : "Minimize terminal"}
                   onClick={() => setIsMinimized(!isMinimized)}
                   className="text-[#A39DAC] hover:text-[#F8F8F2] transition-colors"
                 >
                   <Minimize2 className="h-4 w-4" />
                 </button>
                 <button
+                  aria-label={isFullscreen ? "Exit fullscreen terminal" : "Fullscreen terminal"}
                   onClick={() => setIsFullscreen(!isFullscreen)}
                   className="text-[#A39DAC] hover:text-[#F8F8F2] transition-colors"
                 >
                   {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
                 </button>
                 <button
+                  aria-label="Close terminal"
                   onClick={() => setIsOpen(false)}
                   className="text-[#A39DAC] hover:text-[#FF7EDB] transition-colors"
                 >
@@ -441,12 +418,13 @@ export default function Terminal() {
                     <span className="text-[#A39DAC]">$</span>
                   </div>
                   <input
+                    aria-label="Terminal command"
                     ref={inputRef}
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className="flex-1 bg-transparent border-none outline-none text-[#F8F8F2] ml-2 font-mono"
+                    className="min-w-0 flex-1 bg-transparent border-none outline-none text-[#F8F8F2] ml-2 font-mono"
                     autoComplete="off"
                     spellCheck="false"
                   />

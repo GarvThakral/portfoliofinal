@@ -3,13 +3,18 @@ import type { Metadata } from "next"
 import { Geist } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { profile } from "@/lib/portfolio-data"
 
 const geist = Geist({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Garv Thakral | Full Stack Developer",
-  description: "Portfolio of Garv Thakral, a full stack developer specializing in modern web technologies",
-    generator: 'v0.dev'
+  title: `${profile.name} | AI & ML Engineer · Full-Stack Developer`,
+  description: `${profile.summary} Explore Herth, VisionForge, LeadIntel, Influence OS, and D2B.`,
+  openGraph: {
+    title: `${profile.name} | AI & ML Engineer`,
+    description: profile.summary,
+    type: "website",
+  },
 }
 
 export default function RootLayout({

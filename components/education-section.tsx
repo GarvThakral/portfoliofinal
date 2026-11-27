@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { GraduationCap, Award, Calendar } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { coreSkills } from "@/lib/portfolio-data"
 
 const education = [
   {
@@ -111,33 +112,7 @@ export default function EducationSection() {
         <div className="bg-[#201C2B] rounded-md border border-[#2D2B3A] p-6">
           <h3 className="text-xl font-mono text-[#F8F8F2] mb-6">Technical Expertise</h3>
           <div className="flex flex-wrap gap-2">
-            {[
-              "MERN Stack",
-              "Next.js",
-              "JavaScript",
-              "TypeScript",
-              "HTML/CSS",
-              "Prisma",
-              "Python",
-              "TensorFlow",
-              "Keras",
-              "OpenCV",
-              "C",
-              "WebSockets",
-              "PostgreSQL",
-              "MongoDB",
-              "Git",
-              "Docker",
-              "Postman",
-              "REST APIs",
-              "GraphQL",
-              "CI/CD",
-              "AWS",
-              "Firebase",
-              "Figma",
-              "Adobe Photoshop",
-              "Blender",
-            ].map((skill, index) => (
+            {coreSkills.map((skill, index) => (
               <motion.div
                 key={skill}
                 initial={{ opacity: 0, scale: 0.8 }}
